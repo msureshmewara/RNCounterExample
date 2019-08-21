@@ -27,16 +27,6 @@ import {
 import { connect } from "react-redux";
 class CounterApp extends Component {
   
-  incrementCounter = () => {
-    this.setState({
-      counter: this.state.counter + 1
-    })
-  }
-  decreaseCounter = () => {
-    this.setState({
-      counter: this.state.counter - 1
-    })
-  }
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row' }}>
