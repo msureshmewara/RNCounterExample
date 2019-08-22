@@ -24,27 +24,15 @@ import {
   DebugInstructions,
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
-import { createStore } from "redux";
+
 import { Provider } from 'react-redux';
 import CounterApp from './src/CounterApp';
+import store from './src/store'
 
 
-//create a initial state;
-const initialState = {
-  counter: 0
-}
-//create a reducer to pass into the store
-const reducer = (state = initialState, action) => {
-  switch(action.type) {
-    case 'INCREASE_COUNTER':
-      return {counter: state.counter+1}
-      case 'DECREASE_COUNTER':
-          return {counter: state.counter-1}
-  }
-  return state;
-}
+
 //create store to store the state
-const store = createStore(reducer);
+
 class App extends Component {
 
   render() {

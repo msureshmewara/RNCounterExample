@@ -25,16 +25,27 @@ import {
   ReloadInstructions,
 } from 'react-native/Libraries/NewAppScreen';
 import { connect } from "react-redux";
+import { incrementCounter, decreaseCounter } from "../src/actions";
+
+
 class CounterApp extends Component {
   
+  incrementCounter =()=> {
+    console.log('this.props.counter', this.props.counter)
+    this.props.dispatch(incrementCounter())
+  }
+  decreaseCounter =() => {
+    console.log('this.props.counter', this.props)
+    this.props.dispatch(decreaseCounter())
+  }
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', justifyContent: 'space-around', alignItems: 'center', flexDirection: 'row' }}>
-        <TouchableOpacity onPress={() => this.props.incrementCounter()}>
+        <TouchableOpacity onPress={() => this.incrementCounter()}>
           <Text>Increase</Text>
         </TouchableOpacity>
         <Text style={{ fontSize: 20 }}>{this.props.counter}</Text>
-        <TouchableOpacity onPress={() => this.props.decreaseCounter()}>
+        <TouchableOpacity onPress={() => this.decreaseCounter()}>
           <Text>Decrease</Text>
         </TouchableOpacity>
       </View>
@@ -81,20 +92,6 @@ const styles = StyleSheet.create({
   },
 });
 
-//For accesing the store from provider to CounterApp class we need to create below function which takes the arguments as state.
-//This function will take state from store and map to the current class state.
-function mapStateToProps(state) {
-    return {
-        counter: state.counter
-    }
-}
 
-//Pass actions to modify the states for that we created a below function
-function mapDispatchToProps(dispatch) {
-    return {
-        incrementCounter : () => dispatch({type: 'INCREASE_COUNTER'}),
-        decreaseCounter : () => dispatch({type: 'DECREASE_COUNTER'})
-    }
-}
 //connect--> connection props to the current class (CounterApp)
-export default connect(mapStateToProps, mapDispatchToProps)(CounterApp);
+export default connect(state => ({ counter: state.counter }))(CounterApp);
